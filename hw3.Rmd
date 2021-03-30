@@ -2,8 +2,8 @@
 title: "SOC 577 Homework 3: Natural language processing"
 author: "Your name here"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -142,7 +142,7 @@ top_terms %>% filter(speaker == Y) %>%
 
 Q5. It should be apparent that there are a lot of different characters in these scripts, many of whom are minor characters appearing infrequently. Let's remove some of these characters before proceeding with the analysis. Complete the `summarize` function to create two measures: the number of seasons each character appears in and the total number of lines the character uttered in all seasons. Next, use the `filter` argument to remove infrequent characters by using these two variables. You can decide an appropriate cut-off to use in the filter.
 ```{r q5, echo=TRUE, tidy=TRUE}
-frequent.characters <- speaker.season.counts %>% group_by(speaker) %>%
+frequent.characters <- data %>% group_by(speaker) %>%
   summarize(seasons = , line_count = ) %>% ### Complete the arguments for seasons and line_count
   filter(line_count >= 100 & seasons >= 10) ### Add the filter
 
