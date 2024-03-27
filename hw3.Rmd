@@ -248,7 +248,7 @@ processed.docs <- textProcessor(data$text, metadata = meta) # Add the two stopwo
 output <- prepDocuments(processed.docs$documents, processed.docs$vocab, processed.docs$meta, lower.thresh = 10)
 ```
 
-Q.14. Complete the `stm` function to run an initial topic modeling. Pick a value for `K` and modify the relevance argument to consist of a non-linear function of the year. Add arguments to allow prevalence to vary as a function of month and party and content to vary as a function of party.
+Q.14. Complete the `stm` function to run an initial topic modeling. Pick a value for `K` and add arguments to allow prevalence to vary as a function of month (either linear or non-linear) and party, and content to vary as a function of party.
 
 *This code may take up to 5 minutes to run. I recommend testing it using a sub-sample of the data before running it for the entire dataset.*
 ```{r q14, echo=TRUE, tidy=TRUE}
