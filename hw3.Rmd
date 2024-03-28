@@ -212,7 +212,7 @@ What do you observe when you look at the results? Do these similarities make any
 Let's continue our analysis using word embeddings.
 
 Q9. Use the `word2vec` function to train an embedding model using the *entire corpus*. Complete the function to use the skip-gram model with 100 dimensional vectors, a window size of 3, and 5 negative samples. Set the minimum word count to equal 10.
-```{r q9, echo=TRUE, tidy=TRUE}
+```{r q9a, echo=TRUE, tidy=TRUE}
 model <- word2vec::word2vec(x = tolower(data$text), 
                   type=, # complete argument
                   dim=, # complete argument
@@ -222,7 +222,7 @@ model <- word2vec::word2vec(x = tolower(data$text),
 ```
 
 Let's analyze how politicians are represented in this model. Choose a keyword and run the chunk (you will need to ensure the term you use is in the vocabulary, you will get an error if a word is not recognized). Answer the question below.
-```{r q9, echo=TRUE, tidy=TRUE}
+```{r q9b, echo=TRUE, tidy=TRUE}
 keyword <- "" # Select an appropriate term here
 predict(model, keyword, type = "nearest", top_n = 10)
 ```
