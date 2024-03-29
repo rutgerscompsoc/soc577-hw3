@@ -234,24 +234,24 @@ For the final part of this assignment you will train a topic model on the corpus
 
 The code below creates a new variable called `party`, indicating whether a politician is a Democrat or a Republican. To help make the computation easier we will restrict our focus to the subset of tweets that were written in 2021.
 
-```{r q13prep, echo=TRUE, tidy=TRUE}
+```{r q10prep, echo=TRUE, tidy=TRUE}
 # Run this chunk without modifying the code
 data$party <- factor(ifelse(data$screen_name %in% c("JoeBiden","KamalaHarris","SpeakerPelosi","BernieSanders","AOC","SenSchumer"), "Democrat", "Republican"))
 data <- data %>% filter(year == 2021) # Using only 2021 data
 meta <- data %>% select(party, screen_name, month) # Extracting metadata
 ```
 
-Q.13
+Q.10
 Modify the `textProcessor` function to use the same stopwords as  above. You will also need to modify the `removestopwords` argument, otherwise the model will remove the stopwords above *and* those in the preset lexicon. *Note: It make take a couple of minutes for this chunk to run.*
-```{r q13, echo=TRUE, tidy=TRUE}
+```{r q10, echo=TRUE, tidy=TRUE}
 processed.docs <- textProcessor(data$text, metadata = meta) # Add the two stopwords arguments
 output <- prepDocuments(processed.docs$documents, processed.docs$vocab, processed.docs$meta, lower.thresh = 10)
 ```
 
-Q.14. Complete the `stm` function to run an initial topic modeling. Pick a value for `K` and add arguments to allow prevalence to vary as a function of month (either linear or non-linear) and party, and content to vary as a function of party.
+Q.11. Complete the `stm` function to run an initial topic modeling. Pick a value for `K` and add arguments to allow prevalence to vary as a function of month (either linear or non-linear) and party, and content to vary as a function of party.
 
 *This code may take up to 5 minutes to run. I recommend testing it using a sub-sample of the data before running it for the entire dataset.*
-```{r q14, echo=TRUE, tidy=TRUE}
+```{r q11, echo=TRUE, tidy=TRUE}
 K <- # Choose k (Somewhere between 10 and 100 is recommended)
 fit <- stm(documents = output$documents, vocab = output$vocab, 
            K=K,
@@ -262,9 +262,9 @@ fit <- stm(documents = output$documents, vocab = output$vocab,
            )
 ```
 
-Q.15. We can plot the topic proportions to get the topics that occur most frequently. Run the code below and inspect the results.
+Q.12. We can plot the topic proportions to get the topics that occur most frequently. Run the code below and inspect the results.
 
-```{r q15p, echo=TRUE, tidy = TRUE}
+```{r q12p, echo=TRUE, tidy = TRUE}
 plot(fit, type = "summary")
 ```
 
@@ -282,8 +282,8 @@ top5 <- doc.props %>% summarize_if() %>% # complete arguments
 print(top5)
 ```
 
-Q.16. Explore these five topics using any of the functions covered in lecture or the `stm` documentation (e.g. `findThoughts`, `labelTopics`), then provide names and descriptions below.
-```{r q16, echo=TRUE, tidy=TRUE}
+Q.13. Explore these five topics using any of the functions covered in lecture or the `stm` documentation (e.g. `findThoughts`, `labelTopics`), then provide names and descriptions below.
+```{r q13, echo=TRUE, tidy=TRUE}
 
 ```
 
@@ -295,20 +295,20 @@ Name and describe each of the five topics.
   4. Name: Description:
   5. Name: Description:
   
-Q. 17 Use the`estimateEffect` function covered in lecture to analyze the relationship between the covariate and the topic. 
+Q. 14 Use the`estimateEffect` function covered in lecture to analyze the relationship between the covariate and the topic. 
 
 Modify the first argument of `estimateEffect` to specify the same formula as used for prevalence in the `stm` function. e.g. `1:K ~ a + b`.
 
 Next, modify the `topics` argument of `plot` to select the five topics covered above and change the `custom.labels` argument to contain the names you assigned to topics in the previous question.
-```{r q17, echo=TRUE, tidy=TRUE}
+```{r q14, echo=TRUE, tidy=TRUE}
 prep <- estimateEffect(1:K ~ , fit, meta = output$meta) # add formula
 plot(prep, "month", method = "continuous", topics = c(), model = fit, xaxt = "n", xlab = "month",  # complete topics argument
      labeltype = "custom", custom.labels = c()) # complete names argument
 ```
 Are these topics stable over time or do they vary over time? Do you notice any interesting patterns?
 
-Q.18 Select a topic of interest and plot the differences in content by partisanship. Answer the question below.
-```{r q18, echo=TRUE, tidy=TRUE}
+Q.15 Select a topic of interest and plot the differences in content by partisanship. Answer the question below.
+```{r q15, echo=TRUE, tidy=TRUE}
 plot(fit, type="perspectives", topics=) # Add topic number
 ```
 What is this topic about? Are the differences meaningful?
